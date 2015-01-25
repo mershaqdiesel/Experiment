@@ -49,26 +49,33 @@ public class GameBoard : MonoBehaviour {
 
             if (rowFull)
             {
+            	// destroy all the pieces in the row
+            	for (int k = 0; k < width; ++k)
+            	{
+            		if (board[k, i])
+            		{
+            			Destroy(board[k, i]);
+            		}
+            		board[k, i] = null;
+            	}
+            
             	// drop all the pieces above the row by down by 1
-                for (int l = i+1; l <= height; l++)
+                for (int l = i; l < height; l++)
                 {
-                    if (l < 0)
-                    {
-                        continue;
-                    }
                     for (int m = 0; m < width; m++)
                     {
-                        if (l < height && l > 0)
-                        {
-                            if (board[m, l] != null)
-                            {
-                                board[m, l].transform.Translate(0.0f, -1.0f, 0.0f);
-                            }
-                            board[m, l - 1] = board[m, l];
+						if (board[m, l])
+						{
+							board[m, l].transform.Translate(0.0f, -1.0f, 0.0f);
+						}
+							
+						if (l + 1 < height)
+						{
+                        	board[m, l] = board[m, l + 1];
                         }
-                        else if (l == height)
+                        else
                         {
-                            board[m, l - 1] = null;
+                        	board[m, l] = null;
                         }
                     }
                 }

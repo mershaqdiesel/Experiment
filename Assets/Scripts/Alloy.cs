@@ -19,10 +19,10 @@ public class Alloy : MonoBehaviour
             },
             { "Line", new List<Vector3>()
                 {
-					new Vector3(0, 0),
-                    new Vector3(0, 1),
-					new Vector3(0, 2),
-                    new Vector3(0, 3),
+					new Vector3(0, -1),
+                    new Vector3(0, 0),
+					new Vector3(0, 1),
+                    new Vector3(0, 2),
                 }
             },
             { "L", new List<Vector3>()
@@ -60,9 +60,9 @@ public class Alloy : MonoBehaviour
             { "T", new List<Vector3>()
                 {
                     new Vector3(0, 0),
-					new Vector3(0, 1),
-					new Vector3(-1, 1),
-					new Vector3(1, 1)
+					new Vector3(0, -1),
+					new Vector3(-1, 0),
+					new Vector3(1, 0)
                 }
             }
         };

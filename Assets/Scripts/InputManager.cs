@@ -119,8 +119,14 @@ public class InputManager : MonoBehaviour
 		ingots = _currentAlloy.GetComponentsInChildren<Transform>().Where(t => t.tag == "Ingot");
       	if (Any (Stops, ingots, _gameBoard))
       	{
-      		SaveCurrent(ingots);
-      		MakeNewAlloy();
+			if (SaveCurrent(ingots))
+			{
+				Application.LoadLevel("main");
+			}
+			// Debug.Log(MakeGameBoard());
+			_gameBoard.ClearRows();
+			// Debug.Log(MakeGameBoard());
+			MakeNewAlloy();
       	}
 	}
 
@@ -219,7 +225,7 @@ public class InputManager : MonoBehaviour
         {
             int x = Convert.ToInt32(piece.position.x);
             int y = Convert.ToInt32(piece.position.y);
-			Debug.Log(string.Format("{0}, {1}", x, y));
+			// Debug.Log(string.Format("{0}, {1}", x, y));
             if (x < 0 || x >= _gameBoard.width || y < 0)
             {
                 continue;
@@ -227,8 +233,10 @@ public class InputManager : MonoBehaviour
             if (y >= _gameBoard.height)
             {
                 done = true;
+                Destroy(piece.gameObject);
                 continue;
             }
+			piece.parent = _gameBoard.transform;
             _gameBoard.board[x, y] = piece.gameObject;
         }
         return done;
